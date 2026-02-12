@@ -1,1 +1,31 @@
+# Intuition
+    Think it like Maximum SubArray Concept
 
+# Approach
+    Sliding Window
+
+# Complexity
+- Time complexity : O(n)
+- Space complexity: O(1)
+
+# Code
+<!-- c Program  -->
+int numOfSubarrays(int* arr, int arrSize, int k, int threshold) {
+    int sum = 0;
+    for(int i = 0;i < k;i++)
+        sum += arr[i];
+
+    int count = 0;
+    if((sum/k) >= threshold)
+        count++;
+    int window = 0;
+    for(int i = k;i < arrSize;i++)  
+    {
+        sum = sum - arr[window++] + arr[i];
+        int avg = sum/k;
+        if(avg >= threshold)
+            count++; 
+    }
+    return count;
+}
+```
