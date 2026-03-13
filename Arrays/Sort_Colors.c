@@ -1,26 +1,34 @@
-# Complexity
-- Time complexity:
-<!-- O(n) -->
+# Approach
+    Dutch Flag Algorithm
 
-- Space complexity:
-<!-- O(1) -->
+# Complexity
+- Time complexity: O(n)
+
+- Space complexity: O(1)
 
 # Code
 ```c []
 void sortColors(int* nums, int numsSize) {
-    int zero = 0,one = 0;
-    for(int i = 0;i < numsSize;i++)
+   int low = 0, mid = 0, high = numsSize -1;
+   while(mid <= high)
+   {
+    if(nums[mid] == 0)
     {
-        if(nums[i] == 0)
-            zero++;
-        else if(nums[i] == 1)
-            one++;
+        int temp = nums[low];
+        nums[low] = nums[mid];
+        nums[mid] = temp;
+        low++;
+        mid++;
     }
-    for(int i = 0;i < zero;i++)
-        nums[i] = 0;
-    for(int i = zero;i < (zero+one);i++)
-        nums[i] = 1;
-    for(int i = (zero+one);i < numsSize;i++)
-        nums[i] = 2;
+    else if(nums[mid] == 1)
+        mid++;
+    else
+    {
+         int temp = nums[mid];
+        nums[mid] = nums[high];
+        nums[high] = temp;
+        high--;
+    }
+   }
 }
 ```
